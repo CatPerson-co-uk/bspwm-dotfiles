@@ -1,0 +1,3 @@
+#!/bin/sh
+(cd ~/.config/eww && ./eww close Lockscreen)
+(cd ~/.config/eww && ./eww open Lockscreen)

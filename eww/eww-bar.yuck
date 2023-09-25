@@ -1,0 +1,81 @@
+(defwidget workspaces []
+  (literal :content workspace))
+(deflisten workspace "scripts/workspace")
+
+(defwidget metric [label value onchange]
+  (box :orientation "h"
+       :class "metric"
+       :space-evenly false
+    (box :class "label" label)
+    (scale :min 0
+           :max 101
+           :active {onchange != ""}
+           :value value
+           :onchange onchange)))
+
+(defwidget leftbar []
+  (box :class "leftbar" :orientation "h" :space-evenly false :halign "start" :spacing 40
+    (metric :label ""
+            :value volume
+            :onchange "amixer sset Master {}%")
+    (metric :label ""
+            :value {EWW_RAM.used_mem_perc}
+            :onchange "")
+    (metric :label ""
+            :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
+            :onchange "")))
+
+(defwidget rightbar []
+  (box :class "rightbar" :orientation "h" :space-evenly false :halign "end" :spacing 40
+  (button :onclick "poweroff" "")
+  (button :onclick "reboot" "")
+  (button :onclick "bspc quit" "")
+  time))
+
+(defpoll time :interval "10s"
+  "date '+%H:%M %b %d, %Y'")
+
+(defpoll volume :interval "1s"
+  "amixer sget Master | awk -F '[^0-9]+' '/Left:/{print $3}'")
+
+
+
+
+(defwindow Leftbar
+        :monitor 0
+        :geometry (geometry :x "1%"
+                            :y "1%"
+                            :width "12%"
+                            :height "2%"
+                            :anchor "top left")
+        :stacking "fg"
+        :reserve (struts :distance "4%" :side "top")
+        :windowtype "dock"
+        :wm-ignore false
+(leftbar))
+
+(defwindow Rightbar
+        :monitor 0
+        :geometry (geometry :x "-1%"
+                            :y "1%"
+                            :width "12%"
+                            :height "2%"
+                            :anchor "top right")
+        :stacking "fg"
+        :reserve (struts :distance "4%" :side "top")
+        :windowtype "dock"
+        :wm-ignore false
+(rightbar))
+
+(defwindow Midbar
+           :monitor 0
+           :geometry (geometry :x "0%"
+                               :y "1%"
+                               :width "15%"
+                               :height "2%"
+                               :anchor "top center")
+           :stacking "fg"
+           :reserve (struts :distance "4%" :side "top")
+           :windowtype "dock"
+           :wm-ignore false
+(workspaces))

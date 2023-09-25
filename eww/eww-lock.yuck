@@ -1,0 +1,20 @@
+(defwidget lockscreen []
+    (box :space-evenly false :orientation "v" :class "lockscreen" :valign "start" :style "background-image: url('/home/catperson/.dotfiles/wallpapers/1.png')"
+        (box :valign "start" :space-evenly false :spacing 25
+    (button :onclick "./eww close Lockscreen" "Exit"))
+    (box :valign "end" :space-evenly false :spacing 25 time)))
+
+(defpoll time :interval "10s"
+  "date '+%H:%M %b %d, %Y'")
+
+(defwindow Lockscreen
+    :monitor 0
+    :geometry (geometry 
+                :x "0"
+                :y "0"
+                :width "100%"
+                :height "100%"
+                :anchor "center")
+    :stacking "fg"
+    :wm-ignore true;
+    (lockscreen))
