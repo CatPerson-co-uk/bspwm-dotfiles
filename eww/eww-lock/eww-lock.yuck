@@ -4,8 +4,6 @@
     (button :onclick "./eww close Lockscreen" "Exit"))
     (box :valign "end" :space-evenly false :spacing 25 time)))
 
-(defpoll time :interval "10s"
-  "date '+%H:%M %b %d, %Y'")
 
 (defwindow Lockscreen
     :monitor 0

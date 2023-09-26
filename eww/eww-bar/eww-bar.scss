@@ -1,0 +1,80 @@
+
+.rightbar, .leftbar, .workspaces {
+    background-color: rgba(136, 57, 239, 0.5);
+    color: #fff;
+    font-size: 1.2rem;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 16px;
+
+}
+.metric scale trough highlight {
+    all: unset;
+    background-color: $secondary-color;
+    color: $black;
+    border-radius: 10px;
+  }
+  .metric scale trough {
+    all: unset;
+    background-color: $gray;
+    border-radius: 50px;
+    min-height: 3px;
+    min-width: 50px;
+    margin-left: 10px;
+    margin-right: 20px;
+  }
+  .metric scale trough highlight {
+    all: unset;
+    background-color: $secondary-color;
+    color: $black;
+    border-radius: 10px;
+  }
+  .metric scale trough {
+    all: unset;
+    background-color: $gray;
+    border-radius: 50px;
+    min-height: 3px;
+    min-width: 50px;
+    margin-left: 10px;
+    margin-right: 20px;
+  }
+
+
+/* occupied - focused */
+.I11, .II11, .III11, .IV11, .V11, .VI11, .VII11, .VIII11, .IX11, .X11 {
+  transition: 0.4s;
+  color: $secondary-color;
+  font-family: 'Font Awesome 6 Free Solid';
+  text-shadow: 2px 0 $tertiary-color, -2px 0 $tertiary-color, 0 2px $tertiary-color, 0 -2px $tertiary-color,
+             1px 1px $tertiary-color, -1px -1px $tertiary-color, 1px -1px $tertiary-color, -1px 1px $tertiary-color;
+}
+
+/* unoccupied - focused */
+.I01, .II01, .III01, .IV01, .V01, .VI01, .VII01, .VIII01, .IX01, .X01 {
+  transition: 0.4s;
+  color: $secondary-color;
+  font-family: 'Font Awesome 6 Free Solid';
+  text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
+             1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+}
+
+/* unoccupied - unfocused */
+.I00, .II00, .III00, .IV00, .V00, .VI00, .VII00, .VIII00, .IX00, .X00 {
+  font-family: 'Font Awesome 6 Free';
+  transition: 0.4s;
+  &:hover {
+    color: $secondary-color;
+  }
+}
+
+/* occupied - unfocused */
+.I10, .II10, .III10, .IV10, .V10, .VI10, .VII10, .VIII10, .IX10, .X10 {
+  transition: 0.4s;
+  color: $tertiary-color;
+  font-family: 'Font Awesome 6 Free';
+  &:hover {
+    color: $secondary-color;
+  }
+}
+

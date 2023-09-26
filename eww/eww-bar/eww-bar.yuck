@@ -32,14 +32,6 @@
   (button :onclick "bspc quit" "")
   time))
 
-(defpoll time :interval "10s"
-  "date '+%H:%M %b %d, %Y'")
-
-(defpoll volume :interval "1s"
-  "amixer sget Master | awk -F '[^0-9]+' '/Left:/{print $3}'")
-
-
-
 
 (defwindow Leftbar
         :monitor 0

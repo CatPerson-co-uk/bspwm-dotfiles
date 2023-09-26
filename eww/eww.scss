@@ -1,68 +1,11 @@
 $main-color: rgb(136, 57, 239);
 $secondary-color: #ea76cb;
+$tertiary-color: #dce0e8;
 $black: #24283B;
 $gray: #565F89;
+
+
+@import './eww-bar/eww-bar.scss';
 *{
-    all: unset;
-}
-
-.rightbar, .leftbar, .workspaces {
-    background-color: rgba(136, 57, 239, 0.5);
-    color: #fff;
-    font-size: 1.2rem;
-    padding: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
-    border-radius: 16px;
-
-}
-.metric scale trough highlight {
-    all: unset;
-    background-color: $secondary-color;
-    color: $black;
-    border-radius: 10px;
-  }
-  .metric scale trough {
-    all: unset;
-    background-color: $gray;
-    border-radius: 50px;
-    min-height: 3px;
-    min-width: 50px;
-    margin-left: 10px;
-    margin-right: 20px;
-  }
-  .metric scale trough highlight {
-    all: unset;
-    background-color: $secondary-color;
-    color: $black;
-    border-radius: 10px;
-  }
-  .metric scale trough {
-    all: unset;
-    background-color: $gray;
-    border-radius: 50px;
-    min-height: 3px;
-    min-width: 50px;
-    margin-left: 10px;
-    margin-right: 20px;
-  }
-
-
-.I1, .II1, .III1, .IV1, .V1, .VI1, .VII1, .VIII1, .IX1, .X1 {
-  transition: 0.4s;
-  color: $secondary-color;
-  font-family: 'Font Awesome 6 Free Solid';
-}
-.I0, .II0, .III0, .IV0, .V0, .VI0, .VII0, .VIII0, .IX0, .X0 {
-  font-family: 'Font Awesome 6 Free';
-  transition: 0.4s;
-  &:hover {
-    color: $secondary-color;
-  }
-}
-
-.lockscreen {
-  background-size: contain;
-  background-repeat: no-repeat;
-  padding: 5em;
+  all: unset;
 }

@@ -1,2 +1,8 @@
-(include "eww-bar.yuck")
-(include "eww-lock.yuck")
+(include "./eww-bar/eww-bar.yuck")
+(include "./eww-lock/eww-lock.yuck")
+
+(defpoll time :interval "10s"
+  "date '+%H:%M %b %d, %Y'")
+
+(defpoll volume :interval "1s"
+  "amixer sget Master | awk -F '[^0-9]+' '/Left:/{print $3}'")

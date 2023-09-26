@@ -3,22 +3,29 @@ workspaces() {
 
 ws=("I" "II" "III" "IV" "V" "VI" "VII" "VIII" "IX" "X")
 declare -A f
+declare -A o
 declare -A icon
 counter=0
 for value in "${ws[@]}"; do
     result=$(bspc query -D -d focused --names | grep -c "^$value$")
     if [ "$result" -eq 1 ]; then
         f[$counter]="1"
-        icon[$counter]="\xEF\x84\x91"
+
     else
         f[$counter]="0"
-        icon[$counter]="\xEF\x84\x91"
     fi
+    windowCount=$(bspc query -N -d "$value" | wc -l)
+    if [ "$windowCount" -gt 0 ]; then
+        o[$counter]="1"
+    else
+        o[$counter]="0"
+    fi
+    
+    icon[$counter]="\xEF\x84\x91"
     counter=$((counter+1))
 done
 
-echo -e "(box	:class \"workspaces\" :orientation \"h\"	:halign \"center\"	:halign \"start\"	 :space-evenly \"false\" :spacing \"25\" (button :onclick \"bspc desktop --focus ${ws[0]}\" :class \"${ws[0]}${f[0]}\" \"${icon[0]}\") (button :onclick \"bspc desktop --focus ${ws[1]}\" :class \"${ws[1]}${f[1]}\" \"${icon[1]}\") (button :onclick \"bspc desktop --focus ${ws[2]}\" :class \"${ws[2]}${f[2]}\" \"${icon[2]}\") (button :onclick \"bspc desktop --focus ${ws[3]}\" :class \"${ws[3]}${f[3]}\" \"${icon[3]}\") (button :onclick \"bspc desktop --focus ${ws[4]}\" :class \"${ws[4]}${f[4]}\" \"${icon[4]}\") (button :onclick \"bspc desktop --focus ${ws[5]}\" :class \"${ws[5]}${f[5]}\" \"${icon[5]}\") (button :onclick \"bspc desktop --focus ${ws[6]}\" :class \"${ws[6]}${f[6]}\" \"${icon[6]}\") (button :onclick \"bspc desktop --focus ${ws[7]}\" :class \"${ws[7]}${f[7]}\" \"${icon[7]}\") (button :onclick \"bspc desktop --focus ${ws[8]}\" :class \"${ws[8]}${f[8]}\" \"${icon[8]}\") (button :onclick \"bspc desktop --focus ${ws[9]}\" :class \"${ws[9]}${f[9]}\" \"${icon[9]}\") )"
-
+echo -e "(box	:class \"workspaces\" :orientation \"h\"	:halign \"center\"	:halign \"start\"	 :space-evenly \"false\" :spacing \"25\" (button :onclick \"bspc desktop --focus ${ws[0]}\" :class \"${ws[0]}${o[0]}${f[0]}\" \"${icon[0]}\") (button :onclick \"bspc desktop --focus ${ws[1]}\" :class \"${ws[1]}${o[1]}${f[1]}\" \"${icon[1]}\") (button :onclick \"bspc desktop --focus ${ws[2]}\" :class \"${ws[2]}${o[2]}${f[2]}\" \"${icon[2]}\") (button :onclick \"bspc desktop --focus ${ws[3]}\" :class \"${ws[3]}${o[3]}${f[3]}\" \"${icon[3]}\") (button :onclick \"bspc desktop --focus ${ws[4]}\" :class \"${ws[4]}${o[4]}${f[4]}\" \"${icon[4]}\") (button :onclick \"bspc desktop --focus ${ws[5]}\" :class \"${ws[5]}${o[5]}${f[5]}\" \"${icon[5]}\") (button :onclick \"bspc desktop --focus ${ws[6]}\" :class \"${ws[6]}${o[6]}${f[6]}\" \"${icon[6]}\") (button :onclick \"bspc desktop --focus ${ws[7]}\" :class \"${ws[7]}${o[7]}${f[7]}\" \"${icon[7]}\") (button :onclick \"bspc desktop --focus ${ws[8]}\" :class \"${ws[8]}${o[8]}${f[8]}\" \"${icon[8]}\") (button :onclick \"bspc desktop --focus ${ws[9]}\" :class \"${ws[9]}${o[9]}${f[9]}\" \"${icon[9]}\") )"
 }
 
 
