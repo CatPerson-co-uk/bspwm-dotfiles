@@ -55,13 +55,13 @@
   transition: 0.4s;
   color: $secondary-color;
   font-family: 'Font Awesome 6 Free Solid';
-  text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
-             1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
 }
 
 /* unoccupied - unfocused */
 .I00, .II00, .III00, .IV00, .V00, .VI00, .VII00, .VIII00, .IX00, .X00 {
   font-family: 'Font Awesome 6 Free';
+  color: $tertiary-color;
+  opacity: 0.5;
   transition: 0.4s;
   &:hover {
     color: $secondary-color;
