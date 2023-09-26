@@ -20,7 +20,7 @@ Print
 
 #lockscreen - eww
 super + l
-	~/.config/eww/./lockscreen 
+	~/.config/eww/./launch_lockscreen 
 
 #
 # bspwm hotkeys
