@@ -1,5 +1,5 @@
 
-.rightbar, .leftbar, .workspaces {
+.bar {
     background-color: rgba(136, 57, 239, 0.5);
     color: #fff;
     font-size: 1.2rem;
@@ -41,7 +41,9 @@
   }
 
 
-/* occupied - focused */
+/* Desktopname - IfOccupied - IfFocused 
+
+   occupied - focused */
 .I11, .II11, .III11, .IV11, .V11, .VI11, .VII11, .VIII11, .IX11, .X11 {
   transition: 0.4s;
   color: $secondary-color;
