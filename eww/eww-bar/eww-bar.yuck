@@ -1,6 +1,13 @@
+
+
+
 (defwidget workspaces []
   (literal :content workspace))
 (deflisten workspace "scripts/workspace")
+
+(defwidget artwork []
+  (literal :content spotify))
+(deflisten spotify "scripts/spotify")
 
 (defwidget metric [label value onchange]
   (box :orientation "h"
@@ -13,9 +20,30 @@
            :value value
            :onchange onchange)))
 
+(defwidget songDesc []
+  (box :orientation "h" :space-evenly false :spacing 5
+    (label :text songTitle)
+    (label :text "" :class "icon")
+    (label :text artistName)))
+
+(defwidget songPosition []
+  (box :orientation "h" :space-evenly false :spacing 5 :class "songPositon"
+  (label :text songTime)
+  (label :text "" :class "icon")
+  (label :text songLength)
+  (progress :orientation "h" :value songPercentage :width "100px")))
+
+(defwidget songMetadata []
+  (box :orientation "v" :space-evenly false :valgin "center" :class "metadata" 
+  (songDesc)
+  (songPosition))
+    
+ )
+
 (defwidget center []
-  (box :class "leftbar" :orientation "h" :space-evenly true :halign "center" :spacing 40
-    ))
+  (box :orientation "h" :space-evenly false  :halign "center" :class "centerbar" :spacing 15
+    (artwork)
+    (songMetadata)))
 
 (defwidget right []
   (box :class "rightbar" :orientation "h" :space-evenly false :halign "end" :spacing 20
@@ -35,14 +63,11 @@
 
 
 (defwidget left []
-  (box :orientation "h" 
-       :space-evenly false  
-       :halign "start"
-       :class "left_modules"
+  (box :orientation "h" :space-evenly false  :halign "start" :class "leftbar"
     (workspaces)))
 
 (defwidget bar []
-  (box :class "bar" :orientation "h" :space-evenly true
+  (centerbox :class "bar" :orientation "h" :space-evenly true
     (left)
     (center)
     (right)))
@@ -56,6 +81,6 @@
                                :height "2%"
                                :anchor "top center")
            :stacking "fg"
-           :reserve (struts :distance "4%" :side "top")
+           :reserve (struts :distance "5.5%" :side "top")
            
 (bar))

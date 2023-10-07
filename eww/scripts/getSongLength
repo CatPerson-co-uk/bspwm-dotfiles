@@ -1,0 +1,13 @@
+#!/bin/bash
+getSongLength(){
+duration_in_microseconds=$(playerctl -p spotify metadata --format '{{mpris:length}}')
+duration_in_seconds=$((duration_in_microseconds / 1000000))
+
+minutes=$((duration_in_seconds / 60))
+seconds=$((duration_in_seconds % 60))
+
+formatted_duration=$(printf "%02d:%02d" "$minutes" "$seconds")
+echo "$formatted_duration"
+}
+
+getSongLength

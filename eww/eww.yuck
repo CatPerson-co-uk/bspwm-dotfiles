@@ -6,3 +6,21 @@
 
 (defpoll volume :interval "1s"
   "amixer sget Master | awk -F '[^0-9]+' '/Left:/{print $3}'")
+
+
+(defvar spotify-running false)
+
+(defpoll artistName :interval "1s" :run-while spotify-running :initial ""
+  'playerctl -p spotify metadata xesam:artist')
+
+(defpoll songTitle :interval "1s" :run-while spotify-running :initial ""
+  'playerctl -p spotify metadata xesam:title')
+
+(defpoll songTime :interval "0.5s" :run-while spotify-running :initial "00:00"
+  'playerctl -p spotify metadata --format "{{ duration(position) }}"')
+
+(defpoll songLength :interval "1s" :run-while spotify-running :initial "00:00"
+  'scripts/getSongLength')
+
+(defpoll songPercentage :interval "1s"
+  'python scripts/getSongPercentage.py')

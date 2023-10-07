@@ -1,0 +1,32 @@
+#!/bin/bash
+checkIfRunning(){
+if playerctl -l | grep -q $1; then
+    echo 1
+else
+    echo 0
+fi
+
+}
+
+spotify(){
+if [[ $(checkIfRunning spotify) -eq 1 ]]
+then
+    artUrl=$(playerctl -p spotify metadata mpris:artUrl)
+    musicName=$(playerctl -p spotify metadata xesam:title)
+    artistName=$(playerctl -p spotify metadata xesam:artist)
+    songLength=$(playerctl -p spotify metadata mpris:length)
+
+    formattedLength=$(formatDuration "$songLength")
+
+    (curl -o /tmp/artcover.jpg $artUrl)
+    convert "/tmp/artcover.jpg" -resize 200x200^ -gravity center -extent 200x200 \
+\( -size 200x200 xc:none -fill white -draw "circle 100,100 100,0" \) -compose copy_opacity -composite "/tmp/artcover.png"
+fi
+
+echo -e "(box :class \"music\" :orientation \"h\"	:halign \"start\" :space-evenly \"false\" :spacing \"20\" (image :class \"artwork\" :path \"/tmp/artcover.png\" :image-height \"42\" :image-width \"42\"))"
+}
+while :
+do
+spotify
+sleep 1
+done
