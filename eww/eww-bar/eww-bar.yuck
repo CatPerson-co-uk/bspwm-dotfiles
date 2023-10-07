@@ -21,32 +21,41 @@
            :onchange onchange)))
 
 (defwidget songDesc []
-  (box :orientation "h" :space-evenly false :spacing 5
+  (box :orientation "h" :space-evenly false :spacing 10
     (label :text songTitle)
     (label :text "" :class "icon")
     (label :text artistName)))
 
 (defwidget songPosition []
-  (box :orientation "h" :space-evenly false :spacing 5 :class "songPositon"
+  (box :orientation "v" :space-evenly false :spacing 2 :class "songPositon"
+  (box :orientation "h" :space-evenly false :halign "start" :spacing 37
   (label :text songTime)
   (label :text "" :class "icon")
-  (label :text songLength)
-  (progress :orientation "h" :value songPercentage :width "100px")))
+  (label :text songLength))
+  (box :orientation "h" :space-evenly false :halign "start"
+  (progress :orientation "h" :value songPercentage :width "110"))))
 
 (defwidget songMetadata []
-  (box :orientation "v" :space-evenly false :valgin "center" :class "metadata" 
+  (box :orientation "v" :space-evenly false :valign "center" :class "metadata"
   (songDesc)
-  (songPosition))
-    
- )
+  (songPosition)))
 
-(defwidget center []
-  (box :orientation "h" :space-evenly false  :halign "center" :class "centerbar" :spacing 15
-    (artwork)
-    (songMetadata)))
+(defwidget powerOptions []
+  (box :orientation "h" :space-evenly false :halign "center"
+  (button :onclick "bspc quit" "")
+  (button :onclick "reboot" "")
+  ))
 
-(defwidget right []
-  (box :class "rightbar" :orientation "h" :space-evenly false :halign "end" :spacing 20
+(defwidget powerMenu []
+  (eventbox :onhover "./eww update powermenuRevealed=true" :onhoverlost "./eww update powermenuRevealed=false" :class "powermenu" :width "10" :timeout 1
+  (box
+  (revealer :transition "slideright" :reveal powermenuRevealed 
+  (powerOptions))
+  (button :onclick "poweroff" ""))))
+
+
+(defwidget sysInfo []
+  (box :orientation "h" :space-evenly false :halign "end" :spacing 20
   (metric :label ""
             :value volume
             :onchange "amixer sset Master {}%")
@@ -55,26 +64,34 @@
             :onchange "")
     (metric :label ""
             :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
-            :onchange "")
-  (button :onclick "poweroff" "")
-  (button :onclick "reboot" "")
-  (button :onclick "bspc quit" "")
+            :onchange "")))
+
+(defwidget center []
+  (eventbox :onclick "echo $(playerctl -p spotify metadata xesam:url) | xclip -selection clipboard"
+  (box :orientation "h" :space-evenly false  :halign "center" :class "centerbar" :spacing 15
+    (artwork)
+    (songMetadata))))
+
+(defwidget right []
+  (box :space-evenly false :spacing 20 :halign "end" :class "rightbar"
+  (sysInfo)
+  (powerMenu)
   time))
 
 
 (defwidget left []
-  (box :orientation "h" :space-evenly false  :halign "start" :class "leftbar"
+  (box :orientation "v" :space-evenly false  :valign "center" :class "leftbar"
     (workspaces)))
 
 (defwidget bar []
-  (centerbox :class "bar" :orientation "h" :space-evenly true
+  (centerbox :class "bar" :orientation "h"
     (left)
     (center)
     (right)))
 
 (defwindow bar
            :monitor 0
-           :windowtyle "dock"
+           :windowtype "dock"
            :geometry (geometry :x "0%"
                                :y "1%"
                                :width "97%"
@@ -82,5 +99,6 @@
                                :anchor "top center")
            :stacking "fg"
            :reserve (struts :distance "5.5%" :side "top")
+           :wm-ignore true
            
 (bar))

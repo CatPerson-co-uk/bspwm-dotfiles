@@ -1,6 +1,8 @@
 (include "./eww-bar/eww-bar.yuck")
 (include "./eww-lock/eww-lock.yuck")
 
+(defvar powermenuRevealed false)
+
 (defpoll time :interval "10s"
   "date '+%H:%M %b %d, %Y'")
 
@@ -17,7 +19,7 @@
   'playerctl -p spotify metadata xesam:title')
 
 (defpoll songTime :interval "0.5s" :run-while spotify-running :initial "00:00"
-  'playerctl -p spotify metadata --format "{{ duration(position) }}"')
+  'scripts/getSongProgress')
 
 (defpoll songLength :interval "1s" :run-while spotify-running :initial "00:00"
   'scripts/getSongLength')

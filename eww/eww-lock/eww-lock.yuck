@@ -1,5 +1,5 @@
 (defwidget lockscreen []
-    (box :space-evenly false :orientation "v" :class "lockscreen" :valign "start" :style "background-image: url('/home/catperson/.dotfiles/wallpapers/1.png')"
+    (box :space-evenly false :orientation "v" :class "lockscreen" :valign "fill" :style "background-image: url('/home/catperson/.dotfiles/wallpapers/1.png')"
         (box :valign "start" :space-evenly false :spacing 25
     (button :onclick "./eww close Lockscreen" "Exit"))
     (box :valign "end" :space-evenly false :spacing 25 time)))

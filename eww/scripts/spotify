@@ -16,17 +16,18 @@ then
     artistName=$(playerctl -p spotify metadata xesam:artist)
     songLength=$(playerctl -p spotify metadata mpris:length)
 
-    formattedLength=$(formatDuration "$songLength")
-
     (curl -o /tmp/artcover.jpg $artUrl)
     convert "/tmp/artcover.jpg" -resize 200x200^ -gravity center -extent 200x200 \
 \( -size 200x200 xc:none -fill white -draw "circle 100,100 100,0" \) -compose copy_opacity -composite "/tmp/artcover.png"
 fi
-
-echo -e "(box :class \"music\" :orientation \"h\"	:halign \"start\" :space-evenly \"false\" :spacing \"20\" (image :class \"artwork\" :path \"/tmp/artcover.png\" :image-height \"42\" :image-width \"42\"))"
+declare -g prevSong="$musicName"
+echo -e "(box :class \"music\" :orientation \"h\"	:halign \"start\" :space-evenly \"false\" :spacing \"20\" (image :class \"artwork\" :path \"/tmp/artcover.png\" :image-height \"32\" :image-width \"32\"))"
 }
 while :
 do
+if [[ "$prevSong" != $(playerctl -p spotify metadata xesam:title) ]]
+then
 spotify
+fi 
 sleep 1
 done
