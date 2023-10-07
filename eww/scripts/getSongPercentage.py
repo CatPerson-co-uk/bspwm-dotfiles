@@ -1,19 +1,18 @@
 import subprocess
 
-def convert_time_to_seconds(time_str):
-    minutes, seconds = map(int, time_str.split(':'))
+def convertTimeToSeconds(timeStr):
+    minutes, seconds = map(int, timeStr.split(':'))
     return minutes * 60 + seconds
 
-def get_song_percentage():
-    # Run the Bash script to get the song length
-    song_length_str = subprocess.check_output(['scripts/getSongLength'], shell=True, text=True)
-    song_length = convert_time_to_seconds(song_length_str.strip())
+def getSongPercentage():
+    songLengthStr = subprocess.check_output(['scripts/getSongLength'], shell=True, text=True)
+    songLength = convertTimeToSeconds(songLengthStr.strip())
 
-    song_progress = subprocess.check_output(['playerctl -p spotify metadata --format "{{ duration(position) }}"'], shell=True, text=True)
+    songProgress = subprocess.check_output(['playerctl -p spotify metadata --format "{{ duration(position) }}"'], shell=True, text=True)
     
-    song_progress_seconds = convert_time_to_seconds(song_progress)
+    songProgressSeconds = convertTimeToSeconds(songProgress)
     
-    song_percentage = (song_progress_seconds / song_length) * 100
-    print(f"{song_percentage:.2f}")
+    songPercentage = (songProgressSeconds / songLength) * 100
+    print(f"{songPercentage:.2f}")
 
-get_song_percentage()
+getSongPercentage()
