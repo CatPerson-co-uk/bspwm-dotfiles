@@ -26,4 +26,5 @@ bspc config presel_feedback_color "#ecc2e4"
 # rules
 
 bspc rule -a albert border=off
-bspc rule -a albert sticky=true
+bspc rule -a discord desktop=^2
+

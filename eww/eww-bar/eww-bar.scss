@@ -1,4 +1,11 @@
-
+@keyframes delayColorChange {
+  0% {
+    background-color: $secondary-color;
+  }
+  100% {
+    background-color: rgba(0,0,0,0);
+  }
+}
 
 .bar {
     background-color: rgba(136, 57, 239, 0.5);
@@ -7,9 +14,9 @@
     padding: 6px;
     padding-left: 20px;
     padding-right: 20px;
-    border-radius: 20px;
+    border-radius: 30px;
     font-family: "Roboto", sans-serif;
-    box-shadow: rgba(0,0,0,0.8) 0 0 10px;
+    box-shadow: rgba(0,0,0,0.8) 0 0 5px;
 }
 .artwork {
   border-radius: 60%;
@@ -47,7 +54,21 @@
   margin-right: 20px;
 }
 
+.rightbar .powermenu {
+  padding-left: 20px;
+  background-color: $secondary-color;
+}
+.rightbar .eventbox {
+  animation: delayColorChange 1s;
+  &:hover {
+    background-color: $secondary-color;
+    animation: none;
+  }
+}
+.rightbar .eventbox box{
+  padding-right: 20px;
 
+}
 /* Desktopname - IfOccupied - IfFocused 
 
    occupied - focused */

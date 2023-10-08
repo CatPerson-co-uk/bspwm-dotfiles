@@ -41,21 +41,21 @@
   (songPosition)))
 
 (defwidget powerOptions []
-  (box :orientation "h" :space-evenly false :halign "center"
+  (box :orientation "h" :space-evenly false :halign "center" :spacing 30  :class "powermenu"
   (button :onclick "bspc quit" "")
   (button :onclick "reboot" "")
   ))
 
 (defwidget powerMenu []
-  (eventbox :onhover "./eww update powermenuRevealed=true" :onhoverlost "./eww update powermenuRevealed=false" :class "powermenu" :width "10" :timeout 1
-  (box
-  (revealer :transition "slideright" :reveal powermenuRevealed 
+  (eventbox :onhover "./eww update powermenuRevealed=true" :onhoverlost "./eww update powermenuRevealed=false" :class "eventbox"  
+  (box :space-evenly false :spacing 10 
+  (revealer :transition "slideright" :reveal powermenuRevealed
   (powerOptions))
   (button :onclick "poweroff" ""))))
 
 
 (defwidget sysInfo []
-  (box :orientation "h" :space-evenly false :halign "end" :spacing 20
+  (box :orientation "h" :space-evenly false :halign "end"
   (metric :label ""
             :value volume
             :onchange "amixer sset Master {}%")
@@ -75,8 +75,8 @@
 (defwidget right []
   (box :space-evenly false :spacing 20 :halign "end" :class "rightbar"
   (sysInfo)
-  (powerMenu)
-  time))
+  time
+  (powerMenu)))
 
 
 (defwidget left []
@@ -90,15 +90,15 @@
     (right)))
 
 (defwindow bar
-           :monitor 0
-           :windowtype "dock"
-           :geometry (geometry :x "0%"
-                               :y "1%"
-                               :width "97%"
-                               :height "2%"
-                               :anchor "top center")
-           :stacking "fg"
-           :reserve (struts :distance "5.5%" :side "top")
-           :wm-ignore true
-           
-(bar))
+  :monitor 0
+  :windowtype "dock"
+  :stacking "fg"
+  :wm-ignore true
+  :geometry (geometry :x "0%"
+                      :y "1%"
+                      :width "97%"
+                      :height "2%"
+                      :anchor "top center")
+  :reserve (struts :distance "4%" :side "top")
+  :wm-ignore false
+  (bar))
